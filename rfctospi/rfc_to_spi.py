@@ -6,12 +6,6 @@ import types
 import streamlit as st
 from tempfile import NamedTemporaryFile
 
-
-rfc_path = pathlib.Path(r"C:\Users\nick\Downloads\Desktop")
-print(rfc_path) 
-
-
-
 def get_reimbursable_pay_items():
     reimbursable_pay_items = ["1-4.","1-6.","2-3.","4-1.b.","14-3.","15-3.","15-3.a.","15-3.b.","15-7.",
                           "15-8.","15-9.","15-10.","22-1.","22-2.","22-3.","22-4.","22-5.","22-6.",
