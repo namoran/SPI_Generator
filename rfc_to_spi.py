@@ -202,7 +202,7 @@ def main():
     if rfc!=None and old_spi!=None:
         
         with st.spinner('Wait while processing...'):
-             wb_rfc = get_rfc(rfc)
+            wb_rfc = get_rfc(rfc)
             rfc_worksheet = wb_rfc['RFC']
             spi = get_spi(old_spi)
             SOW_Units = spi['SOW Units']
