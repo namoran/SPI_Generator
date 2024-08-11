@@ -1,0 +1,162 @@
+<?xml version="1.0" standalone="yes"?>
+<controls xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+  <mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <mc:Choice Requires="x14">
+      <control shapeId="47129" r:id="rId8" name="MainSVCheckBox">
+        <controlPr defaultSize="0" autoLine="0" r:id="rId9">
+          <anchor moveWithCells="1">
+            <from>
+              <xdr:col>12</xdr:col>
+              <xdr:colOff>219075</xdr:colOff>
+              <xdr:row>7</xdr:row>
+              <xdr:rowOff>95250</xdr:rowOff>
+            </from>
+            <to>
+              <xdr:col>12</xdr:col>
+              <xdr:colOff>400050</xdr:colOff>
+              <xdr:row>7</xdr:row>
+              <xdr:rowOff>276225</xdr:rowOff>
+            </to>
+          </anchor>
+        </controlPr>
+      </control>
+    </mc:Choice>
+    <mc:Fallback>
+      <control shapeId="47129" r:id="rId8" name="MainSVCheckBox"/>
+    </mc:Fallback>
+  </mc:AlternateContent>
+  <mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <mc:Choice Requires="x14">
+      <control shapeId="47128" r:id="rId10" name="MainYECheckBox">
+        <controlPr defaultSize="0" autoLine="0" r:id="rId9">
+          <anchor moveWithCells="1">
+            <from>
+              <xdr:col>7</xdr:col>
+              <xdr:colOff>219075</xdr:colOff>
+              <xdr:row>7</xdr:row>
+              <xdr:rowOff>95250</xdr:rowOff>
+            </from>
+            <to>
+              <xdr:col>7</xdr:col>
+              <xdr:colOff>400050</xdr:colOff>
+              <xdr:row>7</xdr:row>
+              <xdr:rowOff>276225</xdr:rowOff>
+            </to>
+          </anchor>
+        </controlPr>
+      </control>
+    </mc:Choice>
+    <mc:Fallback>
+      <control shapeId="47128" r:id="rId10" name="MainYECheckBox"/>
+    </mc:Fallback>
+  </mc:AlternateContent>
+  <mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <mc:Choice Requires="x14">
+      <control shapeId="47122" r:id="rId11" name="CFDProjectButton">
+        <controlPr defaultSize="0" autoLine="0" r:id="rId12">
+          <anchor moveWithCells="1">w
+              <from><xdr:col>11</xdr:col><xdr:colOff>419100</xdr:colOff><xdr:row>24</xdr:row><xdr:rowOff>95250</xdr:rowOff></from>
+              <to><xdr:col>14</xdr:col><xdr:colOff>476250</xdr:colOff><xdr:row>27</xdr:row><xdr:rowOff>95250</xdr:rowOff></to>
+            </anchor>
+        </controlPr>
+      </control>
+    </mc:Choice>
+    <mc:Fallback>
+      <control shapeId="47122" r:id="rId11" name="CFDProjectButton"/>
+    </mc:Fallback>
+  </mc:AlternateContent>
+  <mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <mc:Choice Requires="x14">
+      <control shapeId="47121" r:id="rId13" name="WMMProjectButton">
+        <controlPr defaultSize="0" autoLine="0" r:id="rId14">
+          <anchor moveWithCells="1">
+            <from>
+              <xdr:col>7</xdr:col>
+              <xdr:colOff>314325</xdr:colOff>
+              <xdr:row>24</xdr:row>
+              <xdr:rowOff>95250</xdr:rowOff>
+            </from>
+            <to>
+              <xdr:col>10</xdr:col>
+              <xdr:colOff>371475</xdr:colOff>
+              <xdr:row>27</xdr:row>
+              <xdr:rowOff>95250</xdr:rowOff>
+            </to>
+          </anchor>
+        </controlPr>
+      </control>
+    </mc:Choice>
+    <mc:Fallback>
+      <control shapeId="47121" r:id="rId13" name="WMMProjectButton"/>
+    </mc:Fallback>
+  </mc:AlternateContent>
+  <mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <mc:Choice Requires="x14">
+      <control shapeId="47120" r:id="rId15" name="RefWECProjectButton">
+        <controlPr defaultSize="0" autoLine="0" r:id="rId16">
+          <anchor moveWithCells="1">
+            <from>
+              <xdr:col>3</xdr:col>
+              <xdr:colOff>161925</xdr:colOff>
+              <xdr:row>24</xdr:row>
+              <xdr:rowOff>95250</xdr:rowOff>
+            </from>
+            <to>
+              <xdr:col>6</xdr:col>
+              <xdr:colOff>219075</xdr:colOff>
+              <xdr:row>27</xdr:row>
+              <xdr:rowOff>95250</xdr:rowOff>
+            </to>
+          </anchor>
+        </controlPr>
+      </control>
+    </mc:Choice>
+    <mc:Fallback>
+      <control shapeId="47120" r:id="rId15" name="RefWECProjectButton"/>
+    </mc:Fallback>
+  </mc:AlternateContent>
+  <mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <mc:Choice Requires="x14">
+      <control shapeId="47118" r:id="rId17" name="SearchProjectFile">
+        <controlPr defaultSize="0" print="0" autoFill="0" autoPict="0" macro="[0]!SearchExistingLogbook">
+          <anchor moveWithCells="1" sizeWithCells="1">
+            <from>
+              <xdr:col>8</xdr:col>
+              <xdr:colOff>314325</xdr:colOff>
+              <xdr:row>11</xdr:row>
+              <xdr:rowOff>95250</xdr:rowOff>
+            </from>
+            <to>
+              <xdr:col>12</xdr:col>
+              <xdr:colOff>180975</xdr:colOff>
+              <xdr:row>16</xdr:row>
+              <xdr:rowOff>57150</xdr:rowOff>
+            </to>
+          </anchor>
+        </controlPr>
+      </control>
+    </mc:Choice>
+  </mc:AlternateContent>
+  <mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <mc:Choice Requires="x14">
+      <control shapeId="47123" r:id="rId18" name="Button 19">
+        <controlPr defaultSize="0" print="0" autoFill="0" autoPict="0" macro="[0]!CheckLogbookToolVersion">
+          <anchor moveWithCells="1" sizeWithCells="1">
+            <from>
+              <xdr:col>13</xdr:col>
+              <xdr:colOff>76200</xdr:colOff>
+              <xdr:row>11</xdr:row>
+              <xdr:rowOff>95250</xdr:rowOff>
+            </from>
+            <to>
+              <xdr:col>14</xdr:col>
+              <xdr:colOff>476250</xdr:colOff>
+              <xdr:row>16</xdr:row>
+              <xdr:rowOff>57150</xdr:rowOff>
+            </to>
+          </anchor>
+        </controlPr>
+      </control>
+    </mc:Choice>
+  </mc:AlternateContent>
+</controls>
