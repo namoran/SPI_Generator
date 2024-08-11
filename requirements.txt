@@ -17,7 +17,6 @@ markdown-it-py==3.0.0
 MarkupSafe==2.1.5
 mdurl==0.1.2
 numpy==2.0.1
-openpyxl @ file:///C:/Users/nick/Downloads/openpyxl-branch-3.2.zip#sha256=352a7bf78bb074640e15b23eb5d9b8e5528f4f0df22ac4c916bf7bc8598059a6
 packaging==24.1
 pandas==2.2.2
 pillow==10.4.0
