@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<volTypes xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+  <volType type="olapFunctions">
+    <main first="ThisWorkbookDataModel">
+      <tp t="e">
+        <v>#N/A</v>
+        <stp>1</stp>
+        <tr r="F1" s="1"/>
+      </tp>
+    </main>
+  </volType>
+</volTypes>
