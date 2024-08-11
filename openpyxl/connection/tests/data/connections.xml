@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<connections xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">
+  <connection id="1"  name="Query - Data" description="Connection to the 'Data' query in the workbook." type="100" refreshedVersion="8" minRefreshableVersion="5">
+  </connection>
+  <connection id="2"  keepAlive="1" name="ThisWorkbookDataModel" description="Data Model" type="5" refreshedVersion="8" minRefreshableVersion="5" background="1">
+    <dbPr connection="Data Model Connection" command="Model" commandType="1"/>
+    <olapPr sendLocale="1" rowDrillCount="1000"/>
+   </connection>
+   <connection id="3" keepAlive="1" name="Query - Table2" description="Connection to the 'Table2' query in the workbook."
+   type="5" refreshedVersion="8" background="1" saveData="1">
+    <dbPr connection="Provider=Microsoft.Mashup.OleDb.1;Data Source=$Workbook$;Location=Table2;Extended Properties=&quot;&quot;"
+        command="SELECT * FROM [Table2]" />
+    </connection>
+</connections>
