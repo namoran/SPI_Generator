@@ -114,43 +114,36 @@ def load_rfc(rfc_worksheet):
     return lol   
 
 def get_spi(spi_wb):
-    #spi_wb = my_input('enter rfc to update: ')
-    #spi_wb = pathlib.Path(spi_wb) #if spi_wb != '' else  r"C:\Users\nick\Downloads\Desktop\PART2-AttachmentB-SPI-138506266-SA - Copy.xlsm" #example: C:/Users/e317181/OneDrive - Miami-Dade County/Desktop/AttachmentB(Revision1)-SPI-138505875-SA.xlsm
+    """This function creates an instance of the SPI, this keeps the included vba and the links intact"""
     print(spi_wb)
     return openpyxl.load_workbook(spi_wb, keep_vba=True, keep_links=True)
 
 def get_rfc(rfc_wb):
-    #rfc_wb = my_input('enter rfc: ')
-    #rfc_wb = pathlib.Path(rfc_wb) #if (rfc_wb != '') else pathlib.Path(r"C:\Users\nick\Downloads\Desktop\5632 RFC1 VERSION 4 - bad.xlsm")
-    # example: C:/Users/e317181/OneDrive - Miami-Dade County/Desktop/rfc.xlsm
+    """This function creates an instance of the RFC Workbook object, it also ensures that 
+    its in read only mode and data only mode for speed and data integrity"""
     print(rfc_wb)
     return openpyxl.load_workbook(rfc_wb, read_only=True, data_only=True, keep_links=True)
 
 def get_spi_row(pi):
+    """Gets the row on the SPI based on the pay item, if new pay items are added, the included minrow might need to be changed.
+    this has get_pay_items as a dependancy which will need to be changed if pay items are added or removed."""
     min_row=11
     return min_row + get_pay_items().index(pi)
 
 def get_spi_column(task):
+    """Gets the cloumn on the SPI based on the task, if additional task columns are added, the included mincolumn might need to be changed.
+    this has get_tasks as a dependancy which will need to be changed if task columns are added or removed."""
     min_col=7
     return min_col + get_tasks().index(task)
 
 def get_old_spi_cell(ws, pi, task):
-    print(pi)
-    print(task)
-    print(ws)
     row = get_spi_row(pi)
-    print(row)
     column = get_spi_column(task)
-    print(column)
     cell = ws.cell(row=row, column=column)
-    print(cell)
     cell.value =   0 if isinstance(cell.value, types.NoneType) else cell.value
     return cell
 
-#def add_to_spi (oldspicell, rfcvalue):
-#    new_val = oldspicell.value + rfcvalue
-#    SOW_Units.cell(row=row, column=column, value=new_val)
-@st.experimental_fragment
+@st.fragment
 def my_download_button(file):
     st.download_button(label='Download Generated SPI', 
                 data=file, file_name="newlygeneratedspi.xlsm", mime="application/vnd.ms-excel", 
