@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<wsDr xmlns="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing">
+  <twoCellAnchor>
+    <from>
+      <col>6</col>
+      <colOff>16565</colOff>
+      <row>32</row>
+      <rowOff>8282</rowOff>
+    </from>
+    <to>
+      <col>16</col>
+      <colOff>579782</colOff>
+      <row>32</row>
+      <rowOff>182217</rowOff>
+    </to>
+    <sp macro="" textlink="">
+      <nvSpPr>
+        <cNvPr id="4" name="Rectangle">
+          <a:hlinkClick xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:id="rId1"/>
+        </cNvPr>
+        <cNvSpPr/>
+      </nvSpPr>
+      <spPr>
+        <a:xfrm xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+          <a:off x="3694043" y="6675782"/>
+          <a:ext cx="6692348" cy="173935"/>
+        </a:xfrm>
+        <a:prstGeom xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" prst="rect">
+          <a:avLst/>
+        </a:prstGeom>
+        <a:noFill xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+        <a:ln xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+          <a:noFill/>
+          <a:prstDash val="solid"/>
+        </a:ln>
+      </spPr>
+      <style>
+        <a:lnRef xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" idx="2">
+          <a:schemeClr val="accent1">
+            <a:shade val="50000"/>
+          </a:schemeClr>
+        </a:lnRef>
+        <a:fillRef xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" idx="1">
+          <a:schemeClr val="accent1"/>
+        </a:fillRef>
+        <a:effectRef xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" idx="0">
+          <a:schemeClr val="accent1"/>
+        </a:effectRef>
+        <a:fontRef xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" idx="minor">
+          <a:schemeClr val="lt1"/>
+        </a:fontRef>
+      </style>
+      <txBody>
+        <a:bodyPr xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" vertOverflow="clip" horzOverflow="clip" rtlCol="0" anchor="t"/>
+        <a:lstStyle xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"/>
+        <a:p xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+          <a:pPr algn="l"/>
+          <a:r>
+            <a:t/>
+          </a:r>
+          <a:endParaRPr lang="pt-BR" sz="1100"/>
+        </a:p>
+      </txBody>
+    </sp>
+    <clientData/>
+  </twoCellAnchor>
+</wsDr>

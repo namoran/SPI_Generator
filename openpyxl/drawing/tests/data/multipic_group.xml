@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+  <xdr:twoCellAnchor>
+    <xdr:from>
+      <xdr:col>2</xdr:col>
+      <xdr:colOff>257735</xdr:colOff>
+      <xdr:row>127</xdr:row>
+      <xdr:rowOff>35218</xdr:rowOff>
+    </xdr:from>
+    <xdr:to>
+      <xdr:col>15</xdr:col>
+      <xdr:colOff>989507</xdr:colOff>
+      <xdr:row>153</xdr:row>
+      <xdr:rowOff>1599</xdr:rowOff>
+    </xdr:to>
+    <xdr:grpSp>
+      <xdr:nvGrpSpPr>
+        <xdr:cNvPr id="2" name="Group 10">
+        </xdr:cNvPr>
+        <xdr:cNvGrpSpPr/>
+      </xdr:nvGrpSpPr>
+      <xdr:grpSpPr>
+        <a:xfrm>
+          <a:off x="1049617" y="21027571"/>
+          <a:ext cx="13775419" cy="5016499"/>
+          <a:chOff x="952500" y="22872806"/>
+          <a:chExt cx="12172978" cy="4919381"/>
+        </a:xfrm>
+      </xdr:grpSpPr>
+      <xdr:pic>
+        <xdr:nvPicPr>
+          <xdr:cNvPr id="3" name="Picture 8">
+          </xdr:cNvPr>
+          <xdr:cNvPicPr>
+            <a:picLocks noChangeAspect="1"/>
+          </xdr:cNvPicPr>
+        </xdr:nvPicPr>
+        <xdr:blipFill>
+          <a:blip xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:embed="rId1"/>
+          <a:stretch>
+            <a:fillRect/>
+          </a:stretch>
+        </xdr:blipFill>
+        <xdr:spPr>
+          <a:xfrm>
+            <a:off x="6529985" y="22938440"/>
+            <a:ext cx="6595493" cy="4853747"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+        </xdr:spPr>
+      </xdr:pic>
+      <xdr:pic>
+        <xdr:nvPicPr>
+          <xdr:cNvPr id="4" name="Picture 9">
+          </xdr:cNvPr>
+          <xdr:cNvPicPr>
+            <a:picLocks noChangeAspect="1"/>
+          </xdr:cNvPicPr>
+        </xdr:nvPicPr>
+        <xdr:blipFill>
+          <a:blip xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" r:embed="rId2"/>
+          <a:stretch>
+            <a:fillRect/>
+          </a:stretch>
+        </xdr:blipFill>
+        <xdr:spPr>
+          <a:xfrm>
+            <a:off x="952500" y="22872806"/>
+            <a:ext cx="5407159" cy="4896175"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+        </xdr:spPr>
+      </xdr:pic>
+      <xdr:sp macro="" textlink="">
+        <xdr:nvSpPr>
+          <xdr:cNvPr id="5" name="WordArt 5">
+          </xdr:cNvPr>
+          <xdr:cNvSpPr>
+            <a:spLocks noChangeArrowheads="1" noChangeShapeType="1" noTextEdit="1"/>
+          </xdr:cNvSpPr>
+        </xdr:nvSpPr>
+        <xdr:spPr bwMode="auto">
+          <a:xfrm rot="20826373">
+            <a:off x="1911024" y="24416990"/>
+            <a:ext cx="8584624" cy="1808095"/>
+          </a:xfrm>
+          <a:prstGeom prst="rect">
+            <a:avLst/>
+          </a:prstGeom>
+          <a:noFill/>
+          <a:ln>
+            <a:noFill/>
+          </a:ln>
+        </xdr:spPr>
+        <xdr:txBody>
+          <a:bodyPr wrap="none" fromWordArt="1">
+            <a:prstTxWarp prst="textPlain">
+              <a:avLst>
+                <a:gd name="adj" fmla="val 50000"/>
+              </a:avLst>
+            </a:prstTxWarp>
+          </a:bodyPr>
+          <a:lstStyle/>
+          <a:p>
+            <a:pPr algn="ctr" rtl="0">
+              <a:buNone/>
+            </a:pPr>
+            <a:r>
+              <a:rPr lang="en-US" sz="3600" kern="10" spc="0">
+                <a:ln w="9525">
+                  <a:solidFill>
+                    <a:schemeClr val="tx1"/>
+                  </a:solidFill>
+                  <a:round/>
+                  <a:headEnd/>
+                  <a:tailEnd/>
+                </a:ln>
+                <a:solidFill>
+                  <a:schemeClr val="accent1">
+                    <a:alpha val="35000"/>
+                  </a:schemeClr>
+                </a:solidFill>
+                <a:effectLst>
+                  <a:outerShdw dist="35921" dir="2700000" algn="ctr" rotWithShape="0">
+                    <a:srgbClr val="C0C0C0">
+                      <a:alpha val="80000"/>
+                    </a:srgbClr>
+                  </a:outerShdw>
+                </a:effectLst>
+                <a:latin typeface="Impact"/>
+              </a:rPr>
+              <a:t>EXAMPLE</a:t>
+            </a:r>
+          </a:p>
+        </xdr:txBody>
+      </xdr:sp>
+    </xdr:grpSp>
+    <xdr:clientData/>
+  </xdr:twoCellAnchor>
+</xdr:wsDr>

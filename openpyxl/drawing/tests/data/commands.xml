@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xdr:wsDr xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
+  <mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <mc:Choice xmlns:a14="http://schemas.microsoft.com/office/drawing/2010/main" Requires="a14">
+      <xdr:twoCellAnchor editAs="oneCell">
+        <xdr:from>
+          <xdr:col>1</xdr:col>
+          <xdr:colOff>68580</xdr:colOff>
+          <xdr:row>1</xdr:row>
+          <xdr:rowOff>53340</xdr:rowOff>
+        </xdr:from>
+        <xdr:to>
+          <xdr:col>1</xdr:col>
+          <xdr:colOff>1615440</xdr:colOff>
+          <xdr:row>2</xdr:row>
+          <xdr:rowOff>137160</xdr:rowOff>
+        </xdr:to>
+        <xdr:sp macro="" textlink="">
+          <xdr:nvSpPr>
+            <xdr:cNvPr id="1025" name="CommandButton1" hidden="1">
+              <a:extLst>
+                <a:ext uri="{63B3BB69-23CF-44E3-9099-C40C66FF867C}">
+                  <a14:compatExt spid="_x0000_s1025"/>
+                </a:ext>
+              </a:extLst>
+            </xdr:cNvPr>
+            <xdr:cNvSpPr/>
+          </xdr:nvSpPr>
+          <xdr:spPr bwMode="auto">
+            <a:xfrm>
+              <a:off x="0" y="0"/>
+              <a:ext cx="0" cy="0"/>
+            </a:xfrm>
+            <a:prstGeom prst="rect">
+              <a:avLst/>
+            </a:prstGeom>
+            <a:noFill/>
+            <a:ln>
+              <a:noFill/>
+            </a:ln>
+            <a:extLst>
+              <a:ext uri="{91240B29-F687-4F45-9708-019B960494DF}">
+                <a14:hiddenLine w="9525">
+                  <a:noFill/>
+                  <a:miter lim="800000"/>
+                  <a:headEnd/>
+                  <a:tailEnd/>
+                </a14:hiddenLine>
+              </a:ext>
+            </a:extLst>
+          </xdr:spPr>
+        </xdr:sp>
+        <xdr:clientData/>
+      </xdr:twoCellAnchor>
+    </mc:Choice>
+    <mc:Fallback/>
+  </mc:AlternateContent>
+  <mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <mc:Choice xmlns:a14="http://schemas.microsoft.com/office/drawing/2010/main" Requires="a14">
+      <xdr:twoCellAnchor editAs="oneCell">
+        <xdr:from>
+          <xdr:col>1</xdr:col>
+          <xdr:colOff>114300</xdr:colOff>
+          <xdr:row>3</xdr:row>
+          <xdr:rowOff>68580</xdr:rowOff>
+        </xdr:from>
+        <xdr:to>
+          <xdr:col>1</xdr:col>
+          <xdr:colOff>1623060</xdr:colOff>
+          <xdr:row>4</xdr:row>
+          <xdr:rowOff>129540</xdr:rowOff>
+        </xdr:to>
+        <xdr:sp macro="" textlink="">
+          <xdr:nvSpPr>
+            <xdr:cNvPr id="1026" name="CheckBox1" hidden="1">
+              <a:extLst>
+                <a:ext uri="{63B3BB69-23CF-44E3-9099-C40C66FF867C}">
+                  <a14:compatExt spid="_x0000_s1026"/>
+                </a:ext>
+              </a:extLst>
+            </xdr:cNvPr>
+            <xdr:cNvSpPr/>
+          </xdr:nvSpPr>
+          <xdr:spPr bwMode="auto">
+            <a:xfrm>
+              <a:off x="0" y="0"/>
+              <a:ext cx="0" cy="0"/>
+            </a:xfrm>
+            <a:prstGeom prst="rect">
+              <a:avLst/>
+            </a:prstGeom>
+            <a:noFill/>
+            <a:ln>
+              <a:noFill/>
+            </a:ln>
+            <a:extLst>
+              <a:ext uri="{91240B29-F687-4F45-9708-019B960494DF}">
+                <a14:hiddenLine w="9525">
+                  <a:noFill/>
+                  <a:miter lim="800000"/>
+                  <a:headEnd/>
+                  <a:tailEnd/>
+                </a14:hiddenLine>
+              </a:ext>
+            </a:extLst>
+          </xdr:spPr>
+        </xdr:sp>
+        <xdr:clientData/>
+      </xdr:twoCellAnchor>
+    </mc:Choice>
+    <mc:Fallback/>
+  </mc:AlternateContent>
+  <mc:AlternateContent xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+    <mc:Choice xmlns:a14="http://schemas.microsoft.com/office/drawing/2010/main" Requires="a14">
+      <xdr:twoCellAnchor editAs="oneCell">
+        <xdr:from>
+          <xdr:col>1</xdr:col>
+          <xdr:colOff>99060</xdr:colOff>
+          <xdr:row>5</xdr:row>
+          <xdr:rowOff>60960</xdr:rowOff>
+        </xdr:from>
+        <xdr:to>
+          <xdr:col>1</xdr:col>
+          <xdr:colOff>1661160</xdr:colOff>
+          <xdr:row>6</xdr:row>
+          <xdr:rowOff>114300</xdr:rowOff>
+        </xdr:to>
+        <xdr:sp macro="" textlink="">
+          <xdr:nvSpPr>
+            <xdr:cNvPr id="1027" name="OptionButton1" hidden="1">
+              <a:extLst>
+                <a:ext uri="{63B3BB69-23CF-44E3-9099-C40C66FF867C}">
+                  <a14:compatExt spid="_x0000_s1027"/>
+                </a:ext>
+              </a:extLst>
+            </xdr:cNvPr>
+            <xdr:cNvSpPr/>
+          </xdr:nvSpPr>
+          <xdr:spPr bwMode="auto">
+            <a:xfrm>
+              <a:off x="0" y="0"/>
+              <a:ext cx="0" cy="0"/>
+            </a:xfrm>
+            <a:prstGeom prst="rect">
+              <a:avLst/>
+            </a:prstGeom>
+            <a:noFill/>
+            <a:ln>
+              <a:noFill/>
+            </a:ln>
+            <a:extLst>
+              <a:ext uri="{91240B29-F687-4F45-9708-019B960494DF}">
+                <a14:hiddenLine w="9525">
+                  <a:noFill/>
+                  <a:miter lim="800000"/>
+                  <a:headEnd/>
+                  <a:tailEnd/>
+                </a14:hiddenLine>
+              </a:ext>
+            </a:extLst>
+          </xdr:spPr>
+        </xdr:sp>
+        <xdr:clientData/>
+      </xdr:twoCellAnchor>
+    </mc:Choice>
+    <mc:Fallback/>
+  </mc:AlternateContent>
+  <xdr:twoCellAnchor>
+    <xdr:from>
+      <xdr:col>1</xdr:col>
+      <xdr:colOff>114300</xdr:colOff>
+      <xdr:row>7</xdr:row>
+      <xdr:rowOff>60960</xdr:rowOff>
+    </xdr:from>
+    <xdr:to>
+      <xdr:col>1</xdr:col>
+      <xdr:colOff>1653540</xdr:colOff>
+      <xdr:row>8</xdr:row>
+      <xdr:rowOff>160020</xdr:rowOff>
+    </xdr:to>
+    <xdr:sp macro="[0]!RoundedRectangle1_Click" textlink="">
+      <xdr:nvSpPr>
+        <xdr:cNvPr id="2" name="Rounded Rectangle 1"/>
+        <xdr:cNvSpPr/>
+      </xdr:nvSpPr>
+      <xdr:spPr>
+        <a:xfrm>
+          <a:off x="1767840" y="1341120"/>
+          <a:ext cx="1539240" cy="281940"/>
+        </a:xfrm>
+        <a:prstGeom prst="roundRect">
+          <a:avLst/>
+        </a:prstGeom>
+      </xdr:spPr>
+      <xdr:style>
+        <a:lnRef idx="2">
+          <a:schemeClr val="accent1">
+            <a:shade val="50000"/>
+          </a:schemeClr>
+        </a:lnRef>
+        <a:fillRef idx="1">
+          <a:schemeClr val="accent1"/>
+        </a:fillRef>
+        <a:effectRef idx="0">
+          <a:schemeClr val="accent1"/>
+        </a:effectRef>
+        <a:fontRef idx="minor">
+          <a:schemeClr val="lt1"/>
+        </a:fontRef>
+      </xdr:style>
+      <xdr:txBody>
+        <a:bodyPr vertOverflow="clip" horzOverflow="clip" rtlCol="0" anchor="t"/>
+        <a:lstStyle/>
+        <a:p>
+          <a:pPr algn="l"/>
+          <a:endParaRPr lang="en-US" sz="1100"/>
+        </a:p>
+      </xdr:txBody>
+    </xdr:sp>
+    <xdr:clientData/>
+  </xdr:twoCellAnchor>
+</xdr:wsDr>
