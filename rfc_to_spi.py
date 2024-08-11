@@ -195,16 +195,15 @@ def main():
     with col1:
         st.write('### Step 1.')
         rfc = st.file_uploader("Upload your Excel RFC here",type='xlsm')
-    if rfc != None:
-        with st.spinner('Wait while processing...'):
-            wb_rfc = get_rfc(rfc)
-            rfc_worksheet = wb_rfc['RFC']
     
     with col2:
         st.write('### Step 2.')
         old_spi = st.file_uploader("Upload Old SPI",type='xlsm')
-    if old_spi != None:
+    if rfc!=None and old_spi!=None:
+        
         with st.spinner('Wait while processing...'):
+             wb_rfc = get_rfc(rfc)
+            rfc_worksheet = wb_rfc['RFC']
             spi = get_spi(old_spi)
             SOW_Units = spi['SOW Units']
 
