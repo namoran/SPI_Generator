@@ -225,10 +225,10 @@ def main():
         my_download_button(file)    
 
     finally:
-        st.caption('''This tool is authored by Nicholas Moran PG at [Moran.Rocks](https://Moran.Rocks)\
-        Like this tool? Check out the [Change Order Checker](https://change-order-checker.streamlit.app/)\
-        Please Share on [Linkedin](https://www.linkedin.com/shareArticle?mini=true&url=https%3A//spi-generator.streamlit.app/)\
-        or send an [email](mailto:?body=Check%20out%20the%20new%20SPI%20generator%20https%3A//spi-generator.streamlit.app/)''')
+        st.caption('''This tool is authored by Nicholas Moran PG at [Moran.Rocks](https://Moran.Rocks)''')
+        st.caption('''Like this tool? Check out the [Change Order Checker](https://change-order-checker.streamlit.app/)''')
+        st.caption('''This tool is authored by Nicholas Moran PG at [Moran.Rocks](https://Moran.Rocks)''')
+        st.caption('''Please Share on [Linkedin](https://www.linkedin.com/shareArticle?mini=true&url=https%3A//spi-generator.streamlit.app/) or send an [email](mailto:?body=Check%20out%20the%20new%20SPI%20generator%20https%3A//spi-generator.streamlit.app/)''')
    
 if __name__=="__main__":
     main()
