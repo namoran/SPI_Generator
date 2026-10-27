@@ -5,7 +5,9 @@
  * workbook edit happens in patch.js, which modifies the original file in place
  * so the VBA, styles and everything else survive untouched.
  *
- * Depends on PPRXlsx, PAY_ITEMS and TASKS. No DOM access.
+ * Depends on PPRXlsx. No DOM access. Pay items are located from the
+ * labels printed in the SPI workbook itself -- there is no built-in
+ * pay item list.
  */
 var SPI = (function () {
   'use strict';
@@ -14,27 +16,77 @@ var SPI = (function () {
   var SOW_SHEET = 'SOW Units';
   var RFC_FIRST_ROW = 22;   // Python: min_row=22 (skips the surcharge rows)
   var RFC_LAST_ROW = 111;   // Python: max_row=111
-  var SOW_FIRST_ROW = 11;   // Python: min_row=11
-  var SOW_FIRST_COL = 7;    // Python: min_col=7; TASK 1 lands on column I
 
-  function payIndex(pi) {
-    var i = PAY_ITEMS.indexOf(pi);
-    if (i === -1) {
-      throw new Error('Pay item "' + pi + '" is not in the pay item list. ' +
-        'If FDEP added a new pay item, regenerate data.js (tools/gen-data.py).');
+  var LABEL_RE = /^\d{1,2}([-.][0-9A-Za-z]+)*\.$/;
+
+  /* Locate the pay item table in an SOW Units sheet from the workbook
+   * itself. The header row carries a 'PAY ITEM' cell and the 'TASK n
+   * QUANT.' column headers; pay item labels run down the PAY ITEM
+   * column below the header, ending at the totals/version block.
+   * Throws when the table cannot be found -- positions are never
+   * guessed, because a workbook from a different SPI version has
+   * different rows (Version 10.0, for example, has no section 22, so
+   * section 23 sits 31 rows above where a fixed list would look).
+   * Mirrors spi_layout in the Python version. */
+  function spiLayout(sheet) {
+    var scan = sheet.range(1, 40, 1, 24);
+    var hr = -1, lc = -1;
+    for (var i = 0; i < scan.length && hr < 0; i++) {
+      for (var j = 0; j < scan[i].length; j++) {
+        var v = scan[i][j];
+        if (typeof v === 'string' && v.trim().toLowerCase() === 'pay item') { hr = i + 1; lc = j + 1; break; }
+      }
     }
-    return i;
+    if (hr < 0) {
+      throw new Error('no pay item table found in the SPI workbook: ' +
+                      'no "PAY ITEM" header cell in the SOW Units sheet');
+    }
+    var taskCols = {};
+    for (var r = Math.max(1, hr - 1); r <= hr + 1; r++) {
+      for (var c = 1; c <= 24; c++) {
+        var hv = sheet.value(r, c);
+        if (typeof hv === 'string') {
+          var m = /TASK\s*(\d+)/i.exec(hv);
+          if (m) taskCols[parseInt(m[1], 10)] = c;
+        }
+      }
+    }
+    if (!Object.keys(taskCols).length) {
+      throw new Error('no task quantity columns found in the SPI workbook');
+    }
+    var colVals = sheet.range(hr + 1, hr + 800, lc, lc);
+    var labels = [], rows = {}, started = false, misses = 0;
+    for (var k = 0; k < colVals.length; k++) {
+      var raw = colVals[k][0];
+      var s = raw === null || raw === undefined ? '' : String(raw).trim();
+      if (LABEL_RE.test(s)) {
+        started = true; misses = 0;
+        if (!(s in rows)) { rows[s] = hr + 1 + k; labels.push(s); }
+      } else if (started) {
+        if (++misses >= 10) break;
+      }
+    }
+    if (labels.length < 10) {
+      throw new Error('only ' + labels.length + ' pay items found in the SPI workbook');
+    }
+    return { labels: labels, rows: rows, taskCols: taskCols };
   }
 
-  function taskIndex(task) {
-    var i = TASKS.indexOf(task);
-    if (i === -1) throw new Error('Unknown task "' + task + '"');
-    return i;
-  }
-
-  /* Python get_spi_row / get_spi_column. */
-  function cellFor(pi, task) {
-    return { row: SOW_FIRST_ROW + payIndex(pi), col: SOW_FIRST_COL + taskIndex(task) };
+  /* The cell for a pay item and task, located from the workbook's own
+   * pay item table. Throws naming the item when the workbook has no row
+   * with that label. */
+  function cellFor(pi, task, layout) {
+    var row = layout.rows[pi];
+    if (row === undefined) {
+      throw new Error('Pay item "' + pi + '" is not in the SPI workbook: ' +
+        'its pay item table has no row with that label.');
+    }
+    var tnum = parseInt(String(task).split(' ').pop(), 10);
+    var col = layout.taskCols[tnum];
+    if (col === undefined) {
+      throw new Error('Task "' + task + '" has no quantity column in the SPI workbook.');
+    }
+    return { row: row, col: col };
   }
 
   /* Python load_rfc: rows 22..111, columns A..I, rows with no task skipped. */
@@ -63,10 +115,11 @@ var SPI = (function () {
    * adds each line into the live cell. One planned change per cell. */
   function plan(rfcSheet, sowSheet) {
     var items = loadRfc(rfcSheet);
+    var layout = spiLayout(sowSheet);
     var byCell = {};
     var changes = [];
     items.forEach(function (it) {
-      var at = cellFor(it.payItem, it.task);
+      var at = cellFor(it.payItem, it.task, layout);
       var units = it.units === null ? 0 : it.units;
       if (typeof units !== 'number') {
         throw new Error('Row ' + it.sourceRow + ' of the RFC has a non-numeric quantity for pay item ' +
@@ -155,7 +208,7 @@ var SPI = (function () {
     loadRfc: loadRfc,
     plan: plan,
     report: report,
-    cellFor: cellFor,
+    spiLayout: spiLayout,
     open: open,
     sheetOrThrow: sheetOrThrow,
     RFC_SHEET: RFC_SHEET,
