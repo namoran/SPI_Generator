@@ -101,7 +101,21 @@ var SPI = (function () {
       ch.lines += 1;
       ch.parts.push(units);
     });
+    /* Quantities in this program are decimal values -- dollar amounts to
+     * the cent, and FDEP-issued quantities carry at most 6 decimal places.
+     * A raw binary-float sum can land just off the intended decimal
+     * (1000 + -999.99 = 0.009999999999990905 instead of 0.01), so each
+     * planned value is rounded to 6 decimals before it is written. */
+    changes.forEach(function (ch) {
+      ch.units = round6(ch.units);
+      ch.newValue = round6(ch.newValue);
+    });
     return changes;
+  }
+
+  function round6(v) {
+    var r = Math.round(v * 1e6) / 1e6;
+    return r === 0 ? 0 : r;
   }
 
   function colName(n) {

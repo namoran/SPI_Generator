@@ -151,6 +151,16 @@ def my_download_button(file):
                 args=None, kwargs=None, type="primary", 
                 disabled=False, use_container_width=False)
     
+def _norm_qty(v):
+    # Quantities in this program are decimal values -- dollar amounts to the
+    # cent, and FDEP-issued quantities carry at most 6 decimal places. A raw
+    # binary-float sum can land just off the intended decimal (1000.0 +
+    # -999.99 = 0.009999999999990905 instead of 0.01). Round each computed
+    # quantity to 6 decimals so the workbook holds the intended value.
+    r = round(v, 6)
+    return int(r) if float(r).is_integer() else r
+
+
 def generate_report(rfc_items, spi, SOW_Units):
     report=[]
     success = None
@@ -159,6 +169,7 @@ def generate_report(rfc_items, spi, SOW_Units):
             task,pi,units = rfc_item[0],rfc_item[1],rfc_item[3]
             oldval = get_old_spi_cell(SOW_Units,pi, task).value
             get_old_spi_cell(SOW_Units, pi, task).value += units
+            get_old_spi_cell(SOW_Units, pi, task).value = _norm_qty(get_old_spi_cell(SOW_Units, pi, task).value)
 
             report.append('{} unit(s) added to {} in {}, {} The new value is {}'.format(
                 units, 
