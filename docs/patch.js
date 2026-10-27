@@ -114,24 +114,59 @@ var SPIPatch = (function () {
     return '<row' + attrs + '>' + out + '</row>';
   }
 
-  /* Patch just the rows we care about, leaving the rest of the sheet string alone. */
+  /* Patch the rows we care about, leaving the rest of the sheet string alone.
+   * Rows that are missing from the sheet XML entirely (a pay item with no
+   * existing cells anywhere in the workbook) get a new <row> element inserted
+   * in row order — without this, changes landing on empty rows were silently
+   * dropped from the output file. */
   function patchSheet(xml, changes) {
     var byRow = {};
     changes.forEach(function (ch) {
       (byRow[ch.row] = byRow[ch.row] || []).push(ch);
     });
 
+    var missing = Object.keys(byRow).map(Number).sort(function (a, b) { return a - b; });
+    function insertMissing(upToRow) {
+      var s = '';
+      while (missing.length && missing[0] < upToRow) {
+        var rn = missing.shift();
+        s += rebuildRow(' r="' + rn + '"', '', byRow[rn]);
+      }
+      return s;
+    }
+
     var out = '';
     var last = 0;
     var rowRe = /<row\b([^>]*?)(?:\/>|>([\s\S]*?)<\/row>)/g, m;
     while ((m = rowRe.exec(xml))) {
       var r = /\br="(\d+)"/.exec(m[1]);
-      if (!r || !byRow[parseInt(r[1], 10)]) continue;
+      if (!r) continue;
+      var rn = parseInt(r[1], 10);
       out += xml.slice(last, m.index);
-      out += rebuildRow(m[1], m[2], byRow[parseInt(r[1], 10)]);
+      out += insertMissing(rn);
+      if (byRow[rn]) {
+        out += rebuildRow(m[1], m[2], byRow[rn]);
+        missing = missing.filter(function (x) { return x !== rn; });
+      } else {
+        out += m[0];
+      }
       last = rowRe.lastIndex;
     }
     out += xml.slice(last);
+    if (missing.length) {
+      var rest = insertMissing(Infinity);
+      var close = out.indexOf('</sheetData>');
+      if (close === -1) throw new Error('Could not find the end of the sheet data to add new pay item rows.');
+      out = out.slice(0, close) + rest + out.slice(close);
+    }
+
+    // Fail loudly rather than hand back a file missing changes.
+    changes.forEach(function (ch) {
+      var address = colName(ch.col) + ch.row;
+      if (out.indexOf('<c r="' + address + '"') === -1) {
+        throw new Error('Internal error: change to cell ' + address + ' (' + ch.task + ', ' + ch.payItem + ') was not written.');
+      }
+    });
     return out;
   }
 
