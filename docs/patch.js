@@ -86,22 +86,34 @@ var SPIPatch = (function () {
         return;
       }
 
-      // No cell there yet: build one and remember where to splice it in.
-      var before = cells.filter(function (x) { return x.col > ch.col; })[0];
+      // No cell there yet: build its markup. It is placed by column order
+      // during assembly below, not by splicing at a position in the
+      // original body text.
       inserts.push({
-        at: before ? before.start : body.length,
         markup: numericCell(address, '', ch.newValue),
         col: ch.col
       });
     });
 
-    var out = body;
-    cells.slice().reverse().forEach(function (cell) {
-      out = out.slice(0, cell.start) + cell.raw + out.slice(cell.end);
+    // Assemble the row body in column order: walk the existing cells,
+    // emit each insert before the first existing cell with a higher
+    // column, then emit the cell itself. Text between cells is carried
+    // through untouched. No offset into the original body is applied to
+    // the modified text -- a replacement whose markup is shorter or
+    // longer than the original shifts every later offset, which is how
+    // an insert could previously land inside a neighbouring cell's tag
+    // and produce a workbook that would not open.
+    var out = '';
+    var pending = inserts.slice().sort(function (a, b) { return a.col - b.col; });
+    var cursor = 0;
+    cells.forEach(function (cell) {
+      while (pending.length && pending[0].col < cell.col) out += pending.shift().markup;
+      out += body.slice(cursor, cell.start);
+      out += cell.raw;
+      cursor = cell.end;
     });
-    inserts.sort(function (a, b) { return b.at - a.at; }).forEach(function (ins) {
-      out = out.slice(0, ins.at) + ins.markup + out.slice(ins.at);
-    });
+    pending.forEach(function (ins) { out += ins.markup; });
+    out += body.slice(cursor);
 
     // Keep the row's spans hint honest if we added cells outside it.
     var span = /\bspans="(\d+):(\d+)"/.exec(attrs);
@@ -112,6 +124,32 @@ var SPIPatch = (function () {
     }
 
     return '<row' + attrs + '>' + out + '</row>';
+  }
+
+  /* The full markup of one row in a sheet string, or null if the row is
+   * absent (a pay item with no cells anywhere in the workbook). */
+  function extractRow(xmlText, rn) {
+    var rowRe = /<row\b[^>]*?(?:\/>|>[\s\S]*?<\/row>)/g, m;
+    while ((m = rowRe.exec(xmlText))) {
+      var r = /\br="(\d+)"/.exec(m[0]);
+      if (r && parseInt(r[1], 10) === rn) return m[0];
+    }
+    return null;
+  }
+
+  /* Map of cell address -> cell markup for one row's markup. A malformed
+   * row (a cell tag nested inside another cell's attributes, say) parses
+   * to a map that is missing the damaged cells, which is exactly what the
+   * changed-row verification in patchSheet compares against. */
+  function cellMap(rowXml) {
+    var map = {};
+    if (!rowXml) return map;
+    var cellRe = /<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/g, c;
+    while ((c = cellRe.exec(rowXml))) {
+      var ref = /\br="([A-Z]+\d+)"/.exec(c[1]);
+      if (ref) map[ref[1]] = c[0];
+    }
+    return map;
   }
 
   /* Patch the rows we care about, leaving the rest of the sheet string alone.
@@ -160,9 +198,19 @@ var SPIPatch = (function () {
       out = out.slice(0, close) + rest + out.slice(close);
     }
 
-    // Fail loudly rather than hand back a file missing changes -- and check
-    // the written value, not just that the cell exists, so a change that was
-    // overwritten or written incorrectly cannot slip through silently.
+    verifyPatched(xml, out, changes);
+    return out;
+  }
+
+  /* Fail loudly rather than hand back a file missing changes -- and check
+   * the written value, not just that the cell exists, so a change that was
+   * overwritten or written incorrectly cannot slip through silently. */
+  function verifyPatched(xml, out, changes) {
+    var byRow = {};
+    changes.forEach(function (ch) {
+      (byRow[ch.row] = byRow[ch.row] || []).push(ch);
+    });
+
     changes.forEach(function (ch) {
       var address = colName(ch.col) + ch.row;
       var at = out.indexOf('<c r="' + address + '"');
@@ -177,7 +225,33 @@ var SPIPatch = (function () {
           ') was written with the wrong value (expected ' + numStr(ch.newValue) + ').');
       }
     });
-    return out;
+
+    // Also verify the cells the plan did NOT change, in every row it
+    // touched: each one must survive with its original markup, and no
+    // unplanned cell may appear. The value check above cannot see damage
+    // to an unchanged neighbour -- on PO C0C875 an insert landed inside
+    // the following cell's tag, both changed cells read back correctly,
+    // and the broken file was reported as success.
+    Object.keys(byRow).forEach(function (rnKey) {
+      var rn = parseInt(rnKey, 10);
+      var planned = {};
+      byRow[rn].forEach(function (ch) { planned[colName(ch.col) + rn] = true; });
+      var origMap = cellMap(extractRow(xml, rn));
+      var newMap = cellMap(extractRow(out, rn));
+      Object.keys(origMap).forEach(function (addr) {
+        if (planned[addr]) return;
+        if (newMap[addr] !== origMap[addr]) {
+          throw new Error('Internal error: cell ' + addr + ' in row ' + rn +
+            ' was not part of this change but was altered or lost while writing the row.');
+        }
+      });
+      Object.keys(newMap).forEach(function (addr) {
+        if (!origMap[addr] && !planned[addr]) {
+          throw new Error('Internal error: cell ' + addr + ' in row ' + rn +
+            ' appeared in the output but was not part of this change.');
+        }
+      });
+    });
   }
 
   function forceRecalc(workbookXml) {
@@ -215,7 +289,7 @@ var SPIPatch = (function () {
     }
   }
 
-  return { build: build, patchSheet: patchSheet, forceRecalc: forceRecalc };
+  return { build: build, patchSheet: patchSheet, forceRecalc: forceRecalc, verifyPatched: verifyPatched };
 })();
 
 if (typeof module !== 'undefined' && module.exports) module.exports = SPIPatch;
