@@ -55,28 +55,51 @@ var SPI = (function () {
     return out;
   }
 
-  /* Work out every cell to touch, with its current and new value. */
+  /* Work out every cell to touch, with its current and new value.
+   * An RFC can list the same pay item more than once in a task (e.g. a
+   * negative line removing a placeholder and a positive line entering the
+   * actual amount), so lines for the same cell are folded together in RFC
+   * order -- the same accumulation the Python version performs when it
+   * adds each line into the live cell. One planned change per cell. */
   function plan(rfcSheet, sowSheet) {
     var items = loadRfc(rfcSheet);
-    var changes = items.map(function (it) {
+    var byCell = {};
+    var changes = [];
+    items.forEach(function (it) {
       var at = cellFor(it.payItem, it.task);
-      var current = sowSheet.value(at.row, at.col);
-      var oldVal = current === null ? 0 : current;
       var units = it.units === null ? 0 : it.units;
-      if (typeof oldVal !== 'number' || typeof units !== 'number') {
+      if (typeof units !== 'number') {
         throw new Error('Row ' + it.sourceRow + ' of the RFC has a non-numeric quantity for pay item ' +
           it.payItem + ' (' + it.task + ').');
       }
-      return {
-        task: it.task,
-        payItem: it.payItem,
-        row: at.row,
-        col: at.col,
-        address: colName(at.col) + at.row,
-        oldValue: oldVal,
-        units: units,
-        newValue: oldVal + units
-      };
+      var key = at.row + '|' + at.col;
+      var ch = byCell[key];
+      if (!ch) {
+        var current = sowSheet.value(at.row, at.col);
+        var oldVal = current === null ? 0 : current;
+        if (typeof oldVal !== 'number') {
+          throw new Error('Row ' + it.sourceRow + ' of the RFC has a non-numeric quantity for pay item ' +
+            it.payItem + ' (' + it.task + ').');
+        }
+        ch = {
+          task: it.task,
+          payItem: it.payItem,
+          row: at.row,
+          col: at.col,
+          address: colName(at.col) + at.row,
+          oldValue: oldVal,
+          units: 0,
+          newValue: oldVal,
+          lines: 0,
+          parts: []
+        };
+        byCell[key] = ch;
+        changes.push(ch);
+      }
+      ch.units += units;
+      ch.newValue += units;
+      ch.lines += 1;
+      ch.parts.push(units);
     });
     return changes;
   }
@@ -88,10 +111,16 @@ var SPI = (function () {
   }
 
   function report(changes) {
-    return changes.map(function (c) {
-      return c.units + ' unit(s) added to ' + c.oldValue + ' in ' + c.task + ', ' + c.payItem +
-             '. The new value is ' + c.newValue + '.';
+    var out = [];
+    changes.forEach(function (c) {
+      out.push(c.units + ' unit(s) added to ' + c.oldValue + ' in ' + c.task + ', ' + c.payItem +
+               '. The new value is ' + c.newValue + '.');
+      if (c.lines > 1) {
+        out.push('Note: this combines ' + c.lines + ' RFC lines (' + c.parts.join(', ') +
+                 ') for ' + c.task + ', ' + c.payItem + '.');
+      }
     });
+    return out;
   }
 
   function open(buffer, label) {

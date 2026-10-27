@@ -160,11 +160,21 @@ var SPIPatch = (function () {
       out = out.slice(0, close) + rest + out.slice(close);
     }
 
-    // Fail loudly rather than hand back a file missing changes.
+    // Fail loudly rather than hand back a file missing changes -- and check
+    // the written value, not just that the cell exists, so a change that was
+    // overwritten or written incorrectly cannot slip through silently.
     changes.forEach(function (ch) {
       var address = colName(ch.col) + ch.row;
-      if (out.indexOf('<c r="' + address + '"') === -1) {
+      var at = out.indexOf('<c r="' + address + '"');
+      if (at === -1) {
         throw new Error('Internal error: change to cell ' + address + ' (' + ch.task + ', ' + ch.payItem + ') was not written.');
+      }
+      var end = out.indexOf('</c>', at);
+      var cellXml = end === -1 ? '' : out.slice(at, end);
+      var v = /<v>([^<]*)<\/v>/.exec(cellXml);
+      if (!v || v[1] !== numStr(ch.newValue)) {
+        throw new Error('Internal error: change to cell ' + address + ' (' + ch.task + ', ' + ch.payItem +
+          ') was written with the wrong value (expected ' + numStr(ch.newValue) + ').');
       }
     });
     return out;
